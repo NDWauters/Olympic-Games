@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+		<title>Error</title>
+	</head>
+	<body>
+		<section class = "header header-footer-theme">
+		
+			<div class="breadcrumbs">
+				<span><a th:href="@{/sport}" th:text="#{sports.index.title}"></a></span>
+			</div>
+		
+			<div class="header-actions">
+				<th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><span th:text="#{admin}"></span></th:block>
+				<th:block th:if="${#authorization.expression('hasRole(''USER'')')}"><span th:text="#{user}"></span></th:block>
+				<div>
+					<form th:action="@{/logout}" method="post">
+						<input type="submit" value="Logout" /> 
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					</form>
+				</div>
+				
+			</div>
+			
+		</section>
+		
+		<section class="error-container">
+			<span th:text="#{error.general}" class="error general-error"></span>
+		</section>
+	
+	</body>
+	
+	<footer class="header-footer-theme">
+		<span>&copy; Andy Wauters</span>
+	</footer>
+	
+</html>
